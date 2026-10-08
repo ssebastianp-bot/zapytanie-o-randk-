@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mała niespodzianka ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffd6e7, #fff0f6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #5a1735;
+}
+
+.container {
+    width: 90%;
+    max-width: 520px;
+    background: rgba(255,255,255,0.94);
+    border-radius: 30px;
+    padding: 35px 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(120,30,70,0.2);
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+button {
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.yes {
+    background: #e91e63;
+    color: white;
+    transition: 0.2s;
+}
+
+.yes:hover {
+    transform: scale(1.08);
+    background: #d81b60;
+}
+
+.start {
+    font-size: 20px;
+    padding: 18px 35px;
+    background: #e91e63;
+    color: white;
+}
+
+.no {
+    background: #ddd;
+    color: #555;
+    position: absolute;
+}
+
+.hidden {
+    display: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    position: relative;
+    min-height: 60px;
+}
+
+/* SERDUSZKA */
+
+.heart {
+    position: fixed;
+    font-size: 25px;
+    animation: float 5s linear infinite;
+    opacity: 0.7;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* JAMNICZKI */
+
+.dog {
+    position: fixed;
+    font-size: 55px;
+    animation: dogFloat 8s ease-in-out infinite;
+    z-index: 2;
+    pointer-events: none;
+}
+
+@keyframes dogFloat {
+    0%,100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-25px) rotate(5deg);
+    }
+}
+
+/* FINAŁ */
+
+.final {
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+.big-heart {
+    font-size: 70px;
+    animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* NIEWIDOCZNY YOUTUBE */
+
+#youtubePlayer {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    left: -10px;
+    top: -10px;
+    opacity: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NIEWIDOCZNY ODTWARZACZ YOUTUBE -->
+<div id="youtubePlayer"></div>
+
+<!-- SERDUSZKA -->
+<script>
+for (let i = 0; i < 30; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML =
+        Math.random() > 0.5 ? "❤️" : "💕";
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.animationDelay =
+        Math.random() * 5 + "s";
+
+    heart.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+}
+</script>
+
+<!-- JAMNICZKI -->
+<div class="dog" style="left:5%; top:10%;">🐶</div>
+<div class="dog" style="right:5%; bottom:10%;">🐶</div>
+
+
+<div class="container">
+
+    <!-- START -->
+
+    <div id="start">
+
+        <h1>Hej ❤️</h1>
+
+        <p>
+            Mam dla Ciebie małą niespodziankę...
+        </p>
+
+        <p>
+            Zanim zaczniemy, kliknij poniżej 😏
+        </p>
+
+        <button
+            class="start"
+            onclick="startEverything()">
+            START ❤️
+        </button>
+
+    </div>
+
+
+    <!-- PYTANIE 1 -->
+
+    <div id="question1" class="hidden">
+
+        <h1>Hej Ty ❤️</h1>
+
+        <p>
+            Mam do Ciebie bardzo ważne pytanie...
+        </p>
+
+        <h2>
+            Czy pójdziesz ze mną na randkę? 🥰
+        </h2>
+
+        <div class="buttons">
+
+            <button
+                class="yes"
+                onclick="nextQuestion()">
+                TAK ❤️
+            </button>
+
+            <button
+                class="no"
+                id="noButton">
+                NIE 😭
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PYTANIE 2 -->
+
+    <div id="question2" class="hidden">
+
+        <h2>Wiedziałem! 😎❤️</h2>
+
+        <p>
+            To teraz najważniejsze...
+        </p>
+
+        <h2>
+            Co wybierasz?
+        </h2>
+
+        <div class="buttons">
+
+            <button
+                class="yes"
+                onclick="nextQuestion2()">
+                🍝 Kolacja
+            </button>
+
+            <button
+                class="yes"
+                onclick="nextQuestion2()">
+                🎬 Kino
+            </button>
+
+            <button
+                class="yes"
+                onclick="nextQuestion2()">
+                🐶 Spacer
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PYTANIE 3 -->
+
+    <div id="question3" class="hidden">
+
+        <h2>Ostatnie pytanie ❤️</h2>
+
+        <p>
+            Czyli oficjalnie...
+        </p>
+
+        <h2>
+            Jesteśmy umówieni? 🥰
+        </h2>
+
+        <button
+            class="yes"
+            onclick="finalAnswer()">
+            OCZYWIŚCIE ❤️
+        </button>
+
+    </div>
+
+
+    <!-- FINAŁ -->
+
+    <div id="final" class="hidden">
+
+        <div class="big-heart">
+            ❤️
+        </div>
+
+        <div class="final">
+
+            <strong>
+                RANDKA ZAREZERWOWANA! 🥰
+            </strong>
+
+            <p>
+                Nie przyjmuję już żadnych wymówek 😎
+            </p>
+
+            <p>
+                Kocham Cię ❤️
+            </p>
+
+            <p>
+                🐶💕🐶
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   YOUTUBE
+========================= */
+
+let player;
+
+function onYouTubeIframeAPIReady() {
+
+    player = new YT.Player("youtubePlayer", {
+
+        height: "1",
+        width: "1",
+
+        videoId: "0VGjV8Suyvg",
+
+        playerVars: {
+            autoplay: 0,
+            controls: 0,
+            loop: 1,
+            playlist: "0VGjV8Suyvg"
+        }
+    });
+}
+
+
+/* =========================
+   START
+========================= */
+
+function startEverything() {
+
+    document
+        .getElementById("start")
+        .classList.add("hidden");
+
+    document
+        .getElementById("question1")
+        .classList.remove("hidden");
+
+    if (player) {
+
+        player.playVideo();
+
+        player.setVolume(70);
+
+    }
+}
+
+
+/* =========================
+   UCIEKAJĄCE NIE
+========================= */
+
+const noButton =
+    document.getElementById("noButton");
+
+
+function moveNoButton() {
+
+    const maxX =
+        window.innerWidth -
+        noButton.offsetWidth -
+        20;
+
+    const maxY =
+        window.innerHeight -
+        noButton.offsetHeight -
+        20;
+
+    const x =
+        Math.random() * maxX;
+
+    const y =
+        Math.random() * maxY;
+
+    noButton.style.position = "fixed";
+
+    noButton.style.left =
+        x + "px";
+
+    noButton.style.top =
+        y + "px";
+}
+
+
+/* komputer */
+
+noButton.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+
+/* telefon */
+
+noButton.addEventListener(
+    "touchstart",
+    function(e) {
+
+        e.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+/* =========================
+   PYTANIA
+========================= */
+
+function nextQuestion() {
+
+    document
+        .getElementById("question1")
+        .classList.add("hidden");
+
+    document
+        .getElementById("question2")
+        .classList.remove("hidden");
+}
+
+
+function nextQuestion2() {
+
+    document
+        .getElementById("question2")
+        .classList.add("hidden");
+
+    document
+        .getElementById("question3")
+        .classList.remove("hidden");
+}
+
+
+function finalAnswer() {
+
+    document
+        .getElementById("question3")
+        .classList.add("hidden");
+
+    document
+        .getElementById("final")
+        .classList.remove("hidden");
+}
+
+</script>
+
+
+<!-- API YOUTUBE -->
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+</body>
+</html>
