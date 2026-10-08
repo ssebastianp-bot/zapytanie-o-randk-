@@ -1,525 +1,487 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oficjalne zaproszenie dla Marty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>Mała niespodzianka ❤️</title>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e9 40%, #fff5f7 100%);
+            overflow-x: hidden;
+            position: relative;
+            color: #4a2c3a;
+        }
 
-<style>
-* {
-    box-sizing: border-box;
-}
+        /* Latające serduszka */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ffd6e7, #fff0f6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    color: #5a1735;
-}
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatUp linear infinite;
+            opacity: 0.7;
+        }
 
-.container {
-    width: 90%;
-    max-width: 520px;
-    background: rgba(255,255,255,0.94);
-    border-radius: 30px;
-    padding: 35px 25px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(120,30,70,0.2);
-    position: relative;
-    z-index: 10;
-}
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-h1 {
-    font-size: 30px;
-    margin-bottom: 15px;
-}
+        /* Jamniczek z Pinteresta */
+        .dachshund {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            width: 200px;
+            max-width: 40vw;
+            opacity: 0.22;
+            z-index: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08));
+        }
 
-h2 {
-    font-size: 24px;
-    margin-bottom: 25px;
-}
+        @media (max-width: 600px) {
+            .dachshund {
+                width: 140px;
+                bottom: 10px;
+                right: 10px;
+                opacity: 0.18;
+            }
+        }
 
-p {
-    font-size: 18px;
-    line-height: 1.5;
-}
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 520px;
+            margin: 40px auto;
+            padding: 20px;
+        }
 
-button {
-    border: none;
-    padding: 15px 25px;
-    border-radius: 50px;
-    font-size: 17px;
-    cursor: pointer;
-    font-weight: bold;
-}
+        .card {
+            background: rgba(255, 255, 255, 0.93);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 32px 28px;
+            box-shadow: 0 20px 40px rgba(255, 105, 135, 0.15);
+            border: 1px solid rgba(255, 182, 193, 0.4);
+        }
 
-.yes {
-    background: #e91e63;
-    color: white;
-    transition: 0.2s;
-}
+        h1 {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            color: #d6336c;
+        }
 
-.yes:hover {
-    transform: scale(1.08);
-    background: #d81b60;
-}
+        .subtitle {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #8a5a6a;
+            margin-bottom: 28px;
+        }
 
-.start {
-    font-size: 20px;
-    padding: 18px 35px;
-    background: #e91e63;
-    color: white;
-}
+        .step {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
 
-.no {
-    background: #ddd;
-    color: #555;
-    position: absolute;
-}
+        .step.active {
+            display: block;
+        }
 
-.hidden {
-    display: none;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
-    position: relative;
-    min-height: 60px;
-}
+        .question {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.4;
+        }
 
-/* SERDUSZKA */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
-.heart {
-    position: fixed;
-    font-size: 25px;
-    animation: float 5s linear infinite;
-    opacity: 0.7;
-    z-index: 1;
-    pointer-events: none;
-}
+        .btn {
+            background: linear-gradient(135deg, #ff8fab, #ff6b8a);
+            color: white;
+            border: none;
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-weight: 500;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(255, 105, 135, 0.3);
+        }
 
-@keyframes float {
-    0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-    }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255, 105, 135, 0.4);
+        }
 
-    20% {
-        opacity: 0.8;
-    }
+        .btn:active {
+            transform: translateY(0);
+        }
 
-    100% {
-        transform: translateY(-120vh) rotate(360deg);
-        opacity: 0;
-    }
-}
+        .btn.secondary {
+            background: linear-gradient(135deg, #ffb3c6, #ff8fab);
+        }
 
-/* JAMNICZKI */
+        .btn.danger {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+        }
 
-.dog {
-    position: fixed;
-    font-size: 55px;
-    animation: dogFloat 8s ease-in-out infinite;
-    z-index: 2;
-    pointer-events: none;
-}
+        .reaction {
+            text-align: center;
+            font-size: 1.1rem;
+            margin: 18px 0;
+            padding: 14px;
+            background: #fff0f5;
+            border-radius: 14px;
+            color: #c2255c;
+            font-weight: 500;
+            display: none;
+        }
 
-@keyframes dogFloat {
-    0%,100% {
-        transform: translateY(0) rotate(-5deg);
-    }
+        .reaction.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
 
-    50% {
-        transform: translateY(-25px) rotate(5deg);
-    }
-}
+        /* Suwak */
+        .slider-box {
+            margin: 24px 0;
+            text-align: center;
+        }
 
-/* FINAŁ */
+        .slider-label {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
 
-.final {
-    font-size: 24px;
-    line-height: 1.5;
-}
+        .slider-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d6336c;
+            margin: 8px 0 16px;
+        }
 
-.big-heart {
-    font-size: 70px;
-    animation: heartbeat 1s infinite;
-}
+        input[type="range"] {
+            width: 100%;
+            height: 10px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, #ffb3c6, #ff6b8a);
+            border-radius: 10px;
+            outline: none;
+        }
 
-@keyframes heartbeat {
-    0%,100% {
-        transform: scale(1);
-    }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            background: #fff;
+            border: 3px solid #ff6b8a;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
 
-    50% {
-        transform: scale(1.2);
-    }
-}
+        .final-box {
+            text-align: center;
+        }
 
-/* NIEWIDOCZNY YOUTUBE */
+        .final-box h2 {
+            color: #d6336c;
+            margin-bottom: 16px;
+        }
 
-#youtubePlayer {
-    position: fixed;
-    width: 1px;
-    height: 1px;
-    left: -10px;
-    top: -10px;
-    opacity: 0;
-    pointer-events: none;
-}
-</style>
+        .summary {
+            background: #fff5f7;
+            border-radius: 16px;
+            padding: 18px;
+            margin: 20px 0;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background: #d6336c;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(214, 51, 108, 0.4);
+        }
+
+        .hidden-iframe {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- NIEWIDOCZNY ODTWARZACZ YOUTUBE -->
-<div id="youtubePlayer"></div>
+    <!-- Latające serduszka -->
+    <div class="hearts" id="hearts"></div>
 
-<!-- SERDUSZKA -->
-<script>
-for (let i = 0; i < 30; i++) {
+    <!-- Jamniczek z Twojej tablicy Pinterest -->
+    <img src="https://i.pinimg.com/736x/7f/56/f0/7f56f0aaae35a3e773145f69dadd2cd3.jpg" 
+         alt="jamniczek" 
+         class="dachshund">
 
-    const heart = document.createElement("div");
+    <!-- Przycisk muzyki -->
+    <button class="music-btn" onclick="playMusic()">Muzyka</button>
 
-    heart.className = "heart";
+    <!-- Ukryty player YouTube -->
+    <div id="player" class="hidden-iframe"></div>
 
-    heart.innerHTML =
-        Math.random() > 0.5 ? "❤️" : "💕";
+    <div class="container">
+        <div class="card">
+            <h1>Oficjalne zaproszenie</h1>
+            <p class="subtitle">dla Marty • niedziela • tylko Ty</p>
 
-    heart.style.left =
-        Math.random() * 100 + "vw";
+            <!-- KROK 1 -->
+            <div class="step active" id="step1">
+                <div class="question">Czy chcesz się spotkać w niedzielę?</div>
+                <div class="options">
+                    <button class="btn" onclick="answer1('tak')">Tak, oczywiście</button>
+                    <button class="btn secondary" onclick="answer1('moze')">Nie wiem, domyśl się</button>
+                    <button class="btn danger" onclick="answer1('nie')">Nie</button>
+                </div>
+                <div class="reaction" id="reaction1"></div>
+            </div>
 
-    heart.style.animationDelay =
-        Math.random() * 5 + "s";
+            <!-- KROK 2 -->
+            <div class="step" id="step2">
+                <div class="question">O której godzinie?</div>
+                <div class="options">
+                    <button class="btn" onclick="answer2('12:00')">12:00 – brunch i leniwe popołudnie</button>
+                    <button class="btn" onclick="answer2('15:00')">15:00 – idealna pora na spacer</button>
+                    <button class="btn" onclick="answer2('18:00')">18:00 – kolacja + film</button>
+                    <button class="btn" onclick="answer2('20:00')">20:00 – nocna misja</button>
+                    <button class="btn secondary" onclick="answer2('kiedy chcesz')">Kiedy tylko Ty będziesz gotowy</button>
+                </div>
+                <div class="reaction" id="reaction2"></div>
+            </div>
 
-    heart.style.animationDuration =
-        (4 + Math.random() * 5) + "s";
+            <!-- KROK 3 -->
+            <div class="step" id="step3">
+                <div class="question">Na co masz ochotę?</div>
+                <div class="options">
+                    <button class="btn" onclick="answer3('kolacja')">Kolacja na mieście i powrót do domu</button>
+                    <button class="btn" onclick="answer3('film')">Film w domu i wspólna kolacja w domku</button>
+                    <button class="btn" onclick="answer3('grzmocic')">Po co się rozdrabniać, od razu choćby się grzmocić xD</button>
+                </div>
+                <div class="reaction" id="reaction3"></div>
+            </div>
 
-    document.body.appendChild(heart);
-}
-</script>
+            <!-- KROK 4 - suwak -->
+            <div class="step" id="step4">
+                <div class="question">Jak bardzo chce się zobaczyć?</div>
+                <div class="slider-box">
+                    <div class="slider-label">Od 0 do 100</div>
+                    <div class="slider-value" id="sliderValue">50</div>
+                    <input type="range" min="0" max="100" value="50" id="slider" oninput="updateSlider(this.value)">
+                    <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-top:6px; color:#8a5a6a;">
+                        <span>0</span>
+                        <span>100</span>
+                    </div>
+                </div>
+                <button class="btn" style="margin-top:20px; width:100%;" onclick="goToFinal()">Gotowe</button>
+            </div>
 
-<!-- JAMNICZKI -->
-<div class="dog" style="left:5%; top:10%;">🐶</div>
-<div class="dog" style="right:5%; bottom:10%;">🐶</div>
-
-
-<div class="container">
-
-    <!-- START -->
-
-    <div id="start">
-
-        <h1>Hej ❤️</h1>
-
-        <p>
-            Mam dla Ciebie małą niespodziankę...
-        </p>
-
-        <p>
-            Zanim zaczniemy, kliknij poniżej 😏
-        </p>
-
-        <button
-            class="start"
-            onclick="startEverything()">
-            START ❤️
-        </button>
-
-    </div>
-
-
-    <!-- PYTANIE 1 -->
-
-    <div id="question1" class="hidden">
-
-        <h1>Hej Ty ❤️</h1>
-
-        <p>
-            Mam do Ciebie bardzo ważne pytanie...
-        </p>
-
-        <h2>
-            Czy pójdziesz ze mną na randkę? 🥰
-        </h2>
-
-        <div class="buttons">
-
-            <button
-                class="yes"
-                onclick="nextQuestion()">
-                TAK ❤️
-            </button>
-
-            <button
-                class="no"
-                id="noButton">
-                NIE 😭
-            </button>
-
+            <!-- FINAŁ -->
+            <div class="step" id="step5">
+                <div class="final-box">
+                    <h2>Super, już wiem wszystko!</h2>
+                    <div class="summary" id="summary"></div>
+                    <p style="margin-top:16px; color:#8a5a6a;">Napisz mi teraz na Messengerze, że wypełniłaś, żebym wiedział</p>
+                    <button class="btn" style="margin-top:20px; width:100%;" onclick="location.reload()">Wypełnij jeszcze raz</button>
+                </div>
+            </div>
         </div>
-
     </div>
 
+    <script>
+        let answers = {
+            chce: '',
+            godzina: '',
+            ochota: '',
+            slider: 50
+        };
 
-    <!-- PYTANIE 2 -->
+        const nieMessages = [
+            "Jesteś pewna?!",
+            "No chyba żartujesz",
+            "Marta… naprawdę?",
+            "Spróbuj jeszcze raz",
+            "Okej, to ja poczekam… ale nie za długo",
+            "To był żart, prawda?",
+            "Serio? Nawet jamniczek jest smutny"
+        ];
+        let nieIndex = 0;
 
-    <div id="question2" class="hidden">
+        const reactions = {
+            tak: "Idealnie. Już się cieszę",
+            moze: "Domyślam się, że TAK. Dobrze zgadłem?",
+            '12:00': "Brunch brzmi absolutnie idealnie",
+            '15:00': "Spacer o 15:00? Klasyka",
+            '18:00': "Kolacja + film – mój ulubiony combo",
+            '20:00': "Nocna misja zatwierdzona",
+            'kiedy chcesz': "Najromantyczniejsza odpowiedź ever",
+            kolacja: "Kolacja na mieście i potem… dom. Notuję",
+            film: "Film + kolacja w domku = czysty relaks",
+            grzmocic: "Okej, zero rozdrabniania. Zrozumiałem"
+        };
 
-        <h2>Wiedziałem! 😎❤️</h2>
-
-        <p>
-            To teraz najważniejsze...
-        </p>
-
-        <h2>
-            Co wybierasz?
-        </h2>
-
-        <div class="buttons">
-
-            <button
-                class="yes"
-                onclick="nextQuestion2()">
-                🍝 Kolacja
-            </button>
-
-            <button
-                class="yes"
-                onclick="nextQuestion2()">
-                🎬 Kino
-            </button>
-
-            <button
-                class="yes"
-                onclick="nextQuestion2()">
-                🐶 Spacer
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- PYTANIE 3 -->
-
-    <div id="question3" class="hidden">
-
-        <h2>Ostatnie pytanie ❤️</h2>
-
-        <p>
-            Czyli oficjalnie...
-        </p>
-
-        <h2>
-            Jesteśmy umówieni? 🥰
-        </h2>
-
-        <button
-            class="yes"
-            onclick="finalAnswer()">
-            OCZYWIŚCIE ❤️
-        </button>
-
-    </div>
-
-
-    <!-- FINAŁ -->
-
-    <div id="final" class="hidden">
-
-        <div class="big-heart">
-            ❤️
-        </div>
-
-        <div class="final">
-
-            <strong>
-                RANDKA ZAREZERWOWANA! 🥰
-            </strong>
-
-            <p>
-                Nie przyjmuję już żadnych wymówek 😎
-            </p>
-
-            <p>
-                Kocham Cię ❤️
-            </p>
-
-            <p>
-                🐶💕🐶
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<script>
-
-/* =========================
-   YOUTUBE
-========================= */
-
-let player;
-
-function onYouTubeIframeAPIReady() {
-
-    player = new YT.Player("youtubePlayer", {
-
-        height: "1",
-        width: "1",
-
-        videoId: "0VGjV8Suyvg",
-
-        playerVars: {
-            autoplay: 0,
-            controls: 0,
-            loop: 1,
-            playlist: "0VGjV8Suyvg"
+        function createHearts() {
+            const container = document.getElementById('hearts');
+            for (let i = 0; i < 18; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (6 + Math.random() * 8) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (16 + Math.random() * 16) + 'px';
+                container.appendChild(heart);
+            }
         }
-    });
-}
+        createHearts();
 
+        function showStep(id) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
 
-/* =========================
-   START
-========================= */
+        function showReaction(id, text) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            el.classList.add('show');
+        }
 
-function startEverything() {
+        function answer1(val) {
+            if (val === 'nie') {
+                const msg = nieMessages[nieIndex % nieMessages.length];
+                nieIndex++;
+                showReaction('reaction1', msg);
+                return;
+            }
 
-    document
-        .getElementById("start")
-        .classList.add("hidden");
+            answers.chce = val === 'tak' ? 'Tak, oczywiście' : 'Nie wiem, domyśl się';
+            showReaction('reaction1', reactions[val]);
+            setTimeout(() => showStep('step2'), 900);
+        }
 
-    document
-        .getElementById("question1")
-        .classList.remove("hidden");
+        function answer2(val) {
+            answers.godzina = val;
+            showReaction('reaction2', reactions[val] || 'Świetny wybór');
+            setTimeout(() => showStep('step3'), 900);
+        }
 
-    if (player) {
+        function answer3(val) {
+            const labels = {
+                kolacja: 'Kolacja na mieście i powrót do domu',
+                film: 'Film w domu i wspólna kolacja w domku',
+                grzmocic: 'Po co się rozdrabniać, od razu choćby się grzmocić xD'
+            };
+            answers.ochota = labels[val];
+            showReaction('reaction3', reactions[val]);
+            setTimeout(() => showStep('step4'), 900);
+        }
 
-        player.playVideo();
+        function updateSlider(val) {
+            answers.slider = val;
+            document.getElementById('sliderValue').textContent = val;
+        }
 
-        player.setVolume(70);
+        function goToFinal() {
+            const summary = document.getElementById('summary');
+            summary.innerHTML = `
+                <strong>Chcesz się spotkać:</strong> ${answers.chce}<br>
+                <strong>Godzina:</strong> ${answers.godzina}<br>
+                <strong>Na co ochota:</strong> ${answers.ochota}<br>
+                <strong>Jak bardzo chcesz się zobaczyć:</strong> ${answers.slider}/100
+            `;
+            showStep('step5');
+        }
 
-    }
-}
+        // Muzyka - Smoke Emerson CC FREESTYLE
+        let player;
+        function playMusic() {
+            if (!player) {
+                const tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                document.body.appendChild(tag);
 
-
-/* =========================
-   UCIEKAJĄCE NIE
-========================= */
-
-const noButton =
-    document.getElementById("noButton");
-
-
-function moveNoButton() {
-
-    const maxX =
-        window.innerWidth -
-        noButton.offsetWidth -
-        20;
-
-    const maxY =
-        window.innerHeight -
-        noButton.offsetHeight -
-        20;
-
-    const x =
-        Math.random() * maxX;
-
-    const y =
-        Math.random() * maxY;
-
-    noButton.style.position = "fixed";
-
-    noButton.style.left =
-        x + "px";
-
-    noButton.style.top =
-        y + "px";
-}
-
-
-/* komputer */
-
-noButton.addEventListener(
-    "mouseenter",
-    moveNoButton
-);
-
-
-/* telefon */
-
-noButton.addEventListener(
-    "touchstart",
-    function(e) {
-
-        e.preventDefault();
-
-        moveNoButton();
-
-    }
-);
-
-
-/* =========================
-   PYTANIA
-========================= */
-
-function nextQuestion() {
-
-    document
-        .getElementById("question1")
-        .classList.add("hidden");
-
-    document
-        .getElementById("question2")
-        .classList.remove("hidden");
-}
-
-
-function nextQuestion2() {
-
-    document
-        .getElementById("question2")
-        .classList.add("hidden");
-
-    document
-        .getElementById("question3")
-        .classList.remove("hidden");
-}
-
-
-function finalAnswer() {
-
-    document
-        .getElementById("question3")
-        .classList.add("hidden");
-
-    document
-        .getElementById("final")
-        .classList.remove("hidden");
-}
-
-</script>
-
-
-<!-- API YOUTUBE -->
-
-<script src="https://www.youtube.com/iframe_api"></script>
-
+                window.onYouTubeIframeAPIReady = function() {
+                    player = new YT.Player('player', {
+                        height: '1',
+                        width: '1',
+                        videoId: 'CkHXtVeCY1Q',
+                        playerVars: {
+                            autoplay: 1,
+                            controls: 0,
+                            loop: 1,
+                            playlist: 'CkHXtVeCY1Q'
+                        },
+                        events: {
+                            onReady: function(e) {
+                                e.target.playVideo();
+                                e.target.setVolume(40);
+                            }
+                        }
+                    });
+                };
+            } else {
+                player.playVideo();
+            }
+            document.querySelector('.music-btn').textContent = 'Muzyka gra';
+        }
+    </script>
 </body>
 </html>
